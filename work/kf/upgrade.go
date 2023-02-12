@@ -21,7 +21,7 @@ type UpgradeServiceConfigSchema struct {
 	util.CommonError
 	MemberRange struct {
 		UserIDList       []string `json:"userid_list"`        // 专员userid列表
-		DepartmentIDList []string `json:"department_id_list"` // 专员部门列表
+		DepartmentIDList []int `json:"department_id_list"` // 专员部门列表
 	} `json:"member_range"` // 专员服务配置范围
 	GroupChatRange struct {
 		ChatIDList []string `json:"chat_id_list"` // 客户群列表
