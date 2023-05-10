@@ -129,6 +129,7 @@ type BatchGetExternalUserDetailsRequest struct {
 type ExternalUserDetailListResponse struct {
 	util.CommonError
 	ExternalContactList []ExternalUserForBatch `json:"external_contact_list"`
+	NextCursor      string       `json:"next_cursor"`
 }
 
 // ExternalUserForBatch 批量获取外部联系人客户列表
@@ -167,7 +168,7 @@ type FollowInfo struct {
 
 // BatchGetExternalUserDetails 批量获取外部联系人详情
 // @see https://developer.work.weixin.qq.com/document/path/92994
-func (r *Client) BatchGetExternalUserDetails(request BatchGetExternalUserDetailsRequest) ([]ExternalUserForBatch, error) {
+func (r *Client) BatchGetExternalUserDetails(request BatchGetExternalUserDetailsRequest) (*ExternalUserDetailListResponse, error) {
 	accessToken, err := r.GetAccessToken()
 	if err != nil {
 		return nil, err
@@ -186,7 +187,7 @@ func (r *Client) BatchGetExternalUserDetails(request BatchGetExternalUserDetails
 	if err != nil {
 		return nil, err
 	}
-	return result.ExternalContactList, nil
+	return &result, nil
 }
 
 // UpdateUserRemarkRequest 修改客户备注信息请求体
